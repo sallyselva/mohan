@@ -29,4 +29,5 @@
         "arcade"
     ],
     "preferredEditor": "tsprj"
+     "disableTargetTemplateFiles": true
 }
