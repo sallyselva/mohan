@@ -1,33 +1,26 @@
 {
     "name": "mohan",
-    "version": "0.0.1",
-    "description": "",
     "dependencies": {
         "device": "*"
     },
     "files": [
-        "main.blocks",
-        "main.ts",
+        ".vscode/extensions.json",
+        ".vscode/settings.json",
         "README.md",
         "assets.json",
+        "main.blocks",
+        "main.ts",
+        "test.ts",
         "tilemap.g.jres",
         "tilemap.g.ts",
-        "test.ts"
-    ],
-    "testFiles": [
-        "test.ts"
+        "tsconfig.json"
     ],
     "targetVersions": {
-        "branch": "v1.12.49",
-        "tag": "v1.12.49",
-        "commits": "https://github.com/microsoft/pxt-arcade/commits/8b39eda27ca91b27b57fc1f30c6b3b33d3fc2029",
         "target": "1.12.51",
-        "pxt": "8.5.60",
         "targetId": "arcade"
     },
     "supportedTargets": [
         "arcade"
     ],
     "preferredEditor": "tsprj"
-     "disableTargetTemplateFiles": true
 }

@@ -7,9 +7,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     sprites.destroy(otherSprite, effects.spray, 100)
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
     info.changeLifeBy(-1)
-    if(info.life()==0)
-    {
-        web.open("http://192.168.111.64:8081/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
+    if (info.life() == 0) {
+        web.open("http://192.168.111.210:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
         game.over(false)
     }
 })
@@ -198,3 +197,4 @@ game.onUpdateInterval(5000, function () {
         `, randint(-50, 50), randint(-50, 50))
     bee.setKind(SpriteKind.Enemy)
 })
+
