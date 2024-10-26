@@ -9,7 +9,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     info.changeLifeBy(-1)
     if (info.life() == 0) {
         web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
-        game.over(false)
+game.over(false)
     }
 })
 let bee: Sprite = null
@@ -158,6 +158,7 @@ controller.moveSprite(hero)
 hero.setStayInScreen(true)
 info.setScore(0)
 info.setLife(3)
+initializeGame()
 game.onUpdateInterval(5000, function () {
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
@@ -197,4 +198,19 @@ game.onUpdateInterval(5000, function () {
         `, randint(-50, 50), randint(-50, 50))
     bee.setKind(SpriteKind.Enemy)
 })
+ function initializeGame() {
+    const data = web.fetchData("https://your-database-url.com/data");
 
+    if (data) {
+        // Assuming data contains a field `spriteImage`
+        const spriteImage = data.spriteImage;
+        // Set your sprite's image here
+        setSpriteImage(spriteImage);
+    }
+}
+
+function setSpriteImage(imageUrl: string) {
+    // Implementation to set the sprite image
+   // console.log("Setting sprite image to:", imageUrl);
+    // Example: sprite.setImage(imageUrl);
+}
