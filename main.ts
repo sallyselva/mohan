@@ -13,6 +13,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
     info.changeLifeBy(-1)
     if (info.life() == 0) {
+        info.setScore(1000)
       //web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
         web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score(), (response) => {
            // console.log("Received response:" + response);
