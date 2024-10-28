@@ -136,6 +136,7 @@ scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     `)
+
 let hero = sprites.create(img`
     ...........fffffff...ccfff..........
     ..........fbbbbbbbffcbbbbf..........
@@ -157,8 +158,7 @@ let hero = sprites.create(img`
 controller.moveSprite(hero)
 hero.setStayInScreen(true)
 info.setScore(0)
-info.setLife(3)
-initializeGame()
+info.setLife(4)
 game.onUpdateInterval(5000, function () {
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
@@ -198,19 +198,9 @@ game.onUpdateInterval(5000, function () {
         `, randint(-50, 50), randint(-50, 50))
     bee.setKind(SpriteKind.Enemy)
 })
- function initializeGame() {
-    const data = web.fetchData("https://your-database-url.com/data");
 
-    if (data) {
-        // Assuming data contains a field `spriteImage`
-        const spriteImage = data.spriteImage;
-        // Set your sprite's image here
-        setSpriteImage(spriteImage);
-    }
-}
-
+// Function to set the sprite image
 function setSpriteImage(imageUrl: string) {
-    // Implementation to set the sprite image
-   // console.log("Setting sprite image to:", imageUrl);
-    // Example: sprite.setImage(imageUrl);
+    console.log("Setting sprite image to:" + imageUrl);
+    //sprites.SpriteSet(imageUrl);
 }

@@ -1,32 +1,38 @@
 namespace web {
-    const CHANNEL = "web"
+    const CHANNEL = "web";
 
+    // Function to send a JSON message
     function sendJSON(json: any) {
-        const msg = JSON.stringify(json)
+        const msg = JSON.stringify(json);
         const buf = Buffer.fromUTF8(msg);
-        control.simmessages.send(CHANNEL, buf)
+        control.simmessages.send(CHANNEL, buf);
     }
 
-    /**
-     * Opens a new browser window to the given URL.
-     * In order for this to work, you will need to follow
-     * the instructions in the README. This will not do 
-     * anything in arcade.makecode.com out of the box.
-     */
+    // Function to open a URL
     export function open(url: string) {
         sendJSON({
             action: "open",
             url: url
-        })
+        });
     }
-    export async function fetchData(url: string) {
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            return data;
-        } else {
-            console.error("Failed to fetch data:", response.status);
-            return null;
+
+    // Setting up the message receiver
+    control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
+        const msg = buf.toString(); // Convert buffer to string
+        try {
+            const data = JSON.parse(msg); // Parse the JSON string
+
+            // Process the received message
+            if (data.action === "setSprite") {
+                //const imageUrl = data.imageUrl;
+                //setSpriteImage(imageUrl);
+                console.log("Alert received:" + data.action);
+            } else if (data.action === "alert") {
+                console.log("Alert received:" + data.message);
+            }
+        } catch (error) {
+            console.error("Failed to parse message:" +  error);
         }
-    }
+    });
+   
 }
