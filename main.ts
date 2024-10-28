@@ -1,3 +1,8 @@
+// Function to set the sprite image
+// sprites.SpriteSet(imageUrl);
+function setSpriteImage (imageUrl: string) {
+    console.log("Setting sprite image to:" + imageUrl)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.spray, 100)
     music.play(music.melodyPlayable(music.magicWand), music.PlaybackMode.UntilDone)
@@ -8,7 +13,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
     info.changeLifeBy(-1)
     if (info.life() == 0) {
-        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
+      //web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
+        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score(), (response) => {
+            console.log("Received response:" + response);
+            info.setLife(6)
+            // Handle the response data
+        });
 game.over(false)
     }
 })
@@ -136,7 +146,6 @@ scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     `)
-
 let hero = sprites.create(img`
     ...........fffffff...ccfff..........
     ..........fbbbbbbbffcbbbbf..........
@@ -198,9 +207,3 @@ game.onUpdateInterval(5000, function () {
         `, randint(-50, 50), randint(-50, 50))
     bee.setKind(SpriteKind.Enemy)
 })
-
-// Function to set the sprite image
-function setSpriteImage(imageUrl: string) {
-    console.log("Setting sprite image to:" + imageUrl);
-    //sprites.SpriteSet(imageUrl);
-}

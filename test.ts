@@ -1,5 +1,6 @@
 namespace web {
     const CHANNEL = "web";
+    let responseCallback: ((data: any) => void) | null = null;
 
     // Function to send a JSON message
     function sendJSON(json: any) {
@@ -8,8 +9,10 @@ namespace web {
         control.simmessages.send(CHANNEL, buf);
     }
 
-    // Function to open a URL
-    export function open(url: string) {
+    // Function to open a URL with a callback
+    export function open(url: string, callback: (data: any) => void): void {
+        responseCallback = callback; // Store the callback function
+
         sendJSON({
             action: "open",
             url: url
@@ -22,17 +25,14 @@ namespace web {
         try {
             const data = JSON.parse(msg); // Parse the JSON string
 
-            // Process the received message
-            if (data.action === "setSprite") {
-                //const imageUrl = data.imageUrl;
-                //setSpriteImage(imageUrl);
-                console.log("Alert received:" + data.action);
-            } else if (data.action === "alert") {
-                console.log("Alert received:" + data.message);
+            // Process the received message and invoke the callback if available
+            if ((data.action === "setSprite" || data.action === "alert") && responseCallback) {
+                console.log("Message received:" + data);
+                responseCallback(data); // Call the callback with received data
+                responseCallback = null; // Clear the callback after use
             }
         } catch (error) {
-            console.error("Failed to parse message:" +  error);
+            console.error("Failed to parse message:" + error);
         }
     });
-   
 }
