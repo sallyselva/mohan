@@ -17,8 +17,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
       //web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
         web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score(), (response) => {
            // console.log("Received response:" + response);
-            info.setScore(3000)
+           // info.setScore(3000)
             // Handle the response data
+            game.showLongText("test",DialogLayout.Center);
         });
 //game.over(false)
     }

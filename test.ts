@@ -24,7 +24,7 @@ namespace web {
         const msg = buf.toString(); // Convert buffer to string
         try {
             const data = JSON.parse(msg); // Parse the JSON string
-
+            game.showLongText(msg,null);
             // Process the received message and invoke the callback if available
             if ((data.action === "setSprite" || data.action === "alert") && responseCallback) {
                 console.log("Message received:" + data);
