@@ -205,7 +205,7 @@ game.onUpdateInterval(5000, function () {
 
 control.simmessages.onReceived("web", (buf: Buffer) => {
     const msg = JSON.parse(buf.toString());
-
+    game.showLongText(msg.action,DialogLayout.Top);
     if (msg.action === "myGameFunction") {
         myGameFunction(msg.data); // Call the function you want
     }
