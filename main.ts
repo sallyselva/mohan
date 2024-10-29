@@ -205,6 +205,7 @@ game.onUpdateInterval(5000, function () {
 
 control.simmessages.onReceived("web", (buf: Buffer) => {
     const msg = JSON.parse(buf.toString());
+    info.setScore(1000);
     game.showLongText(msg.action,DialogLayout.Top);
     if (msg.action === "myGameFunction") {
         myGameFunction(msg.data); // Call the function you want
@@ -213,6 +214,6 @@ control.simmessages.onReceived("web", (buf: Buffer) => {
 
 function myGameFunction(data: any) {
     console.log("Game function called with data:" + data);
-    info.setScore(1000)
+    info.setScore(2000);
     // Perform specific game actions here
 }
