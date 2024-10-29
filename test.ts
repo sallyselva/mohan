@@ -27,7 +27,7 @@ namespace web {
             //game.showLongText(msg,);
             // Process the received message and invoke the callback if available
            // if ((data.action === "setSprite" || data.action === "alert") && responseCallback) {
-                console.log("Message received:" + data);
+                //console.log("Message received:" + data);
                 responseCallback(data); // Call the callback with received data
                 responseCallback = null; // Clear the callback after use
            // }
