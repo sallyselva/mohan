@@ -2,7 +2,8 @@
     "name": "mohan",
     "version": "0.0.12",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "controller": "*"
     },
     "files": [
         ".vscode/extensions.json",

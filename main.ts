@@ -1,28 +1,21 @@
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherSprite2) {
+    sprites.destroy(otherSprite2, effects.spray, 100)
+    music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
+    info.changeLifeBy(-1)
+    // game.over(false)
+    if (info.life() == 0) {
+        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + ("" + info.score()) + "&score=" + ("" + info.score()));
+    }
+})
 // Function to set the sprite image
 // sprites.SpriteSet(imageUrl);
-//function setSpriteImage (imageUrl: string) {
-//    console.log("Setting sprite image to:" + imageUrl)
-//}
+// function setSpriteImage (imageUrl: string) {
+// console.log("Setting sprite image to:" + imageUrl)
+// }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.spray, 100)
     music.play(music.melodyPlayable(music.magicWand), music.PlaybackMode.UntilDone)
     info.changeScoreBy(1)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(otherSprite, effects.spray, 100)
-    music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
-    info.changeLifeBy(-1)
-    if (info.life() == 0) {
-        info.setScore(1000)
-      //web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score())
-        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score(), (response) => {
-           // console.log("Received response:" + response);
-            info.setScore(3000)
-            // Handle the response data
-            game.showLongText("test",DialogLayout.Bottom);
-        });
-//game.over(false)
-    }
 })
 let bee: Sprite = null
 let clover: Sprite = null
@@ -209,3 +202,17 @@ game.onUpdateInterval(5000, function () {
         `, randint(-50, 50), randint(-50, 50))
     bee.setKind(SpriteKind.Enemy)
 })
+
+control.simmessages.onReceived("web", (buf: Buffer) => {
+    const msg = JSON.parse(buf.toString());
+
+    if (msg.action === "myGameFunction") {
+        myGameFunction(msg.data); // Call the function you want
+    }
+});
+
+function myGameFunction(data: any) {
+    console.log("Game function called with data:" + data);
+    info.setScore(1000)
+    // Perform specific game actions here
+}
