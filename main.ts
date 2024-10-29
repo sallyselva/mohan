@@ -19,7 +19,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
            // console.log("Received response:" + response);
            // info.setScore(3000)
             // Handle the response data
-            game.showLongText("test",DialogLayout.Center);
+            game.showLongText("test",DialogLayout.Bottom);
         });
 //game.over(false)
     }
