@@ -24,13 +24,13 @@ namespace web {
         const msg = buf.toString(); // Convert buffer to string
         try {
             const data = JSON.parse(msg); // Parse the JSON string
-            game.showLongText(msg,null);
+            //game.showLongText(msg,);
             // Process the received message and invoke the callback if available
-            if ((data.action === "setSprite" || data.action === "alert") && responseCallback) {
+           // if ((data.action === "setSprite" || data.action === "alert") && responseCallback) {
                 console.log("Message received:" + data);
                 responseCallback(data); // Call the callback with received data
                 responseCallback = null; // Clear the callback after use
-            }
+           // }
         } catch (error) {
             console.error("Failed to parse message:" + error);
         }
