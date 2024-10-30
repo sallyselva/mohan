@@ -4,6 +4,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     info.changeLifeBy(-1)
     // game.over(false)
     if (info.life() == 0) {
+        //info.setScore(1000)
         web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + ("" + info.score()) + "&score=" + ("" + info.score()));
     }
 })
@@ -162,7 +163,7 @@ let hero = sprites.create(img`
 controller.moveSprite(hero)
 hero.setStayInScreen(true)
 info.setScore(0)
-info.setLife(4)
+info.setLife(1)
 game.onUpdateInterval(5000, function () {
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
@@ -202,18 +203,15 @@ game.onUpdateInterval(5000, function () {
         `, randint(-50, 50), randint(-50, 50))
     bee.setKind(SpriteKind.Enemy)
 })
-
 control.simmessages.onReceived("web", (buf: Buffer) => {
     const msg = JSON.parse(buf.toString());
-    info.setScore(1000);
-    game.showLongText(msg.action,DialogLayout.Top);
+    info.setScore(2100);
     if (msg.action === "myGameFunction") {
         myGameFunction(msg.data); // Call the function you want
     }
 });
 
 function myGameFunction(data: any) {
-    console.log("Game function called with data:" + data);
-    info.setScore(2000);
+    console.log("Game function called with data: " + data);
     // Perform specific game actions here
 }
