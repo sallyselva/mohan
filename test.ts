@@ -20,6 +20,17 @@ namespace web {
         })
     }
     
+    control.simmessages.onReceived("web", (buf: Buffer) => {
+        const msg = JSON.parse(buf.toString());
+        info.setScore(2100);
+        if (msg.action === "myGameFunction") {
+            myGameFunction(msg.data); // Call the function you want
+        }
+    });
 
+    function myGameFunction(data: any) {
+        console.log("Game function called with data: " + data);
+        // Perform specific game actions here
+    }
     
 }
