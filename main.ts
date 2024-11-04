@@ -3,14 +3,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
     info.changeLifeBy(-1)
     // game.over(false)
-
     if (info.life() == 0) {
-        const finalScore = info.score();
+        finalScore = info.score()
         web.sendScore(finalScore);
-        console.log("Sending open message with URL");
+console.log("Sending open message with URL")
         web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + finalScore + "&score=" + finalScore);
     }
-    
 })
 // Function to set the sprite image
 // sprites.SpriteSet(imageUrl);
@@ -24,6 +22,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
 })
 let bee: Sprite = null
 let clover: Sprite = null
+let finalScore = 0
 scene.setBackgroundImage(img`
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -168,6 +167,48 @@ controller.moveSprite(hero)
 hero.setStayInScreen(true)
 info.setScore(0)
 info.setLife(1)
+control.simmessages.onReceived("web", (buf: Buffer) => {
+    console.log("Make Code Message received:"+  buf.toString());
+});
+web.sendScore(1234);
+namespace web {
+    const CHANNEL = "web";
+
+    function sendJSON(json: any) {
+        const msg = JSON.stringify(json);
+        const buf = Buffer.fromUTF8(msg);
+        control.simmessages.send(CHANNEL, buf);
+    }
+
+    export function open(url: string) {
+        sendJSON({ action: "open", url: url });
+    }
+
+    export function sendScore(score: number) {
+        sendJSON({ action: "sendScore", score: score });
+    }
+
+    control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
+        console.log("Message received in MakeCode:"+ buf.toString());
+        const msg2 = JSON.parse(buf.toString());
+        if (msg2.action === "sendScore") {
+            handleReceivedScore(msg2.score);
+        } else if (msg2.action === "myGameFunction") {
+            myGameFunction(msg2.data);
+        }
+    });
+    function myGameFunction(data: any) {
+        console.log("Game function called with data:"+ data);
+        // Perform specific game actions here
+        info.setScore(100);
+    }
+    function handleReceivedScore(score: number) {
+        info.setScore(score);
+        console.log("Score received: " + score);
+    }
+
+   
+}
 game.onUpdateInterval(5000, function () {
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
@@ -207,40 +248,3 @@ game.onUpdateInterval(5000, function () {
         `, randint(-50, 50), randint(-50, 50))
     bee.setKind(SpriteKind.Enemy)
 })
-
-namespace web {
-    const CHANNEL = "web";
-
-    function sendJSON(json: any) {
-        const msg = JSON.stringify(json);
-        const buf = Buffer.fromUTF8(msg);
-        control.simmessages.send(CHANNEL, buf);
-    }
-
-    export function open(url: string) {
-        sendJSON({ action: "open", url: url });
-    }
-
-    export function sendScore(score: number) {
-        sendJSON({ action: "sendScore", score: score });
-    }
-
-    control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
-        console.log("Message received in MakeCode:"+ buf.toString());
-        const msg = JSON.parse(buf.toString());
-        if (msg.action === "sendScore") {
-            handleReceivedScore(msg.score);
-        } else if (msg.action === "myGameFunction") {
-            myGameFunction(msg.data);
-        }
-    });
-    function myGameFunction(data: any) {
-        console.log("Game function called with data:"+ data);
-        // Perform specific game actions here
-        info.setScore(100);
-    }
-    function handleReceivedScore(score: number) {
-        info.setScore(score);
-        console.log("Score received: " + score);
-    }
-}
