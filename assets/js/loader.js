@@ -74,43 +74,46 @@ function makeCodeRun(options) {
         started = false;
     }
 
-    window.addEventListener('message', function (ev) {
-        var d = ev.data
-        if (d.type == "ready") {
-            var loader = document.getElementById("loader");
-            if (loader)
-                loader.remove();
-            isReady = true;
-            startSim();
-        } else if (d.type == "simulator") {
-            switch (d.command) {
-                case "restart":
-                    stopSim();
-                    startSim();
-                    break;
-                case "setstate":
-                    if (d.stateValue === null)
-                        delete simState[d.stateKey];
-                    else
-                        simState[d.stateKey] = d.stateValue;
-                    simStateChanged = true;
-                    break;
-            }
-        } else if (d.type === "messagepacket" && d.channel) {
-            const handler = channelHandlers[d.channel]
-            if (handler) {
-                try {
-                    const buf = d.data;
-                    const str = uint8ArrayToString(buf);
-                    const data = JSON.parse(str)
-                    handler(data);
-                } catch (e) {
-                    console.log(`invalid simmessage`)
-                    console.log(e)
+   window.addEventListener('message', function (ev) {
+    debugger;
+    var d = ev.data;
+    console.log("Received message from postMessage:", d);
+    if (d.type == "ready") {
+        var loader = document.getElementById("loader");
+        if (loader) loader.remove();
+        isReady = true;
+        startSim();
+    } else if (d.type == "simulator") {
+        switch (d.command) {
+            case "restart":
+                stopSim();
+                startSim();
+                break;
+            case "setstate":
+                if (d.stateValue === null) {
+                    delete simState[d.stateKey];                        
+                } else {
+                    simState[d.stateKey] = d.stateValue;
                 }
+                simStateChanged = true;
+                break;
+        }
+    } else if (d.type === "messagepacket" && d.channel) {
+        const handler = channelHandlers[d.channel];
+        if (handler) {
+            try {
+                const buf = d.data;
+                const str = uint8ArrayToString(buf);
+                const data = JSON.parse(str);
+                console.log("Calling handler for channel:", d.channel, "with data:", data);
+                handler(data);
+            } catch (e) {
+                console.log("Invalid simmessage");
+                console.log(e);
             }
-        }            
-    }, false);
+        }
+    }
+}, false);
 
     // helpers
     function uint8ArrayToString(input) {
