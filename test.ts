@@ -31,7 +31,7 @@ namespace web {
     });
 
     function handleReceivedScore(score: number) {
-        info.setScore(score);
+        info.setScore(1000);
         console.log("Score received: " + score);
     }
 }
