@@ -230,11 +230,15 @@ namespace web {
         const msg = JSON.parse(buf.toString());
         if (msg.action === "sendScore") {
             handleReceivedScore(msg.score);
-        } else if (msg.action === "open") {
-            open(msg.url);
+        } else if (msg.action === "myGameFunction") {
+            myGameFunction(msg.data);
         }
     });
-
+    function myGameFunction(data: any) {
+        console.log("Game function called with data:"+ data);
+        // Perform specific game actions here
+        info.setScore(100);
+    }
     function handleReceivedScore(score: number) {
         info.setScore(score);
         console.log("Score received: " + score);
