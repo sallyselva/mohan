@@ -3,14 +3,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
     info.changeLifeBy(-1)
     // game.over(false)
+
     if (info.life() == 0) {
-       // info.setScore(1000)
-       // web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + ("" + info.score()) + "&score=" + ("" + info.score()))
-        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + ("" + info.score()) + "&score=" + ("" + info.score()), (response) => {
-            //console.log("Browser opened with response:"+ response);
-            game.showLongText(response,DialogLayout.Top);
-        });
+        const finalScore = info.score();
+        web.sendScore(finalScore);
+        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + finalScore + "&score=" + finalScore);
     }
+    
 })
 // Function to set the sprite image
 // sprites.SpriteSet(imageUrl);
