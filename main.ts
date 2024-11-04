@@ -7,6 +7,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     if (info.life() == 0) {
         const finalScore = info.score();
         web.sendScore(finalScore);
+        console.log("Sending open message with URL");
         web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + finalScore + "&score=" + finalScore);
     }
     
