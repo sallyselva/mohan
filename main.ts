@@ -4,8 +4,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     info.changeLifeBy(-1)
     // game.over(false)
     if (info.life() == 0) {
-        info.setScore(1000)
-        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + ("" + info.score()) + "&score=" + ("" + info.score()))
+       // info.setScore(1000)
+       // web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + ("" + info.score()) + "&score=" + ("" + info.score()))
+        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + ("" + info.score()) + "&score=" + ("" + info.score()), (response) => {
+            //console.log("Browser opened with response:"+ response);
+            game.showLongText(response,DialogLayout.Top);
+        });
     }
 })
 // Function to set the sprite image
@@ -163,7 +167,7 @@ let hero = sprites.create(img`
 controller.moveSprite(hero)
 hero.setStayInScreen(true)
 info.setScore(0)
-info.setLife(4)
+info.setLife(1)
 game.onUpdateInterval(5000, function () {
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........

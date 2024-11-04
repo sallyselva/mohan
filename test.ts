@@ -1,30 +1,37 @@
 namespace web {
-    const CHANNEL = "web"
+    const CHANNEL = "web";
 
-    function sendJSON(json: any) {
-        const msg = JSON.stringify(json)
+    function sendJSON(json: any, callback: (data: any) => void) {
+        const msg = JSON.stringify(json);
         const buf = Buffer.fromUTF8(msg);
-        control.simmessages.send(CHANNEL, buf)
+
+        // Listen for the response once the message is sent
+        control.simmessages.onReceived(CHANNEL, (responseBuf: Buffer) => {
+            const responseMsg = JSON.parse(responseBuf.toString());
+
+            // Check if the response matches the request action, then call the callback
+            if (responseMsg.action === json.action) {
+                callback(responseMsg.data);  // Invoke the callback with the response data
+            }
+        });
+
+        // Send the message
+        control.simmessages.send(CHANNEL, buf);
     }
 
-    /**
-     * Opens a new browser window to the given URL.
-     * In order for this to work, you will need to follow
-     * the instructions in the README. This will not do 
-     * anything in arcade.makecode.com out of the box.
-     */
-    export function open(url: string) {
+    export function open(url: string, callback: (data: any) => void) {
         sendJSON({
             action: "open",
             url: url
-        })
+        }, callback);
     }
-    
-    control.simmessages.onReceived("web", (buf: Buffer) => {
+
+    control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
         const msg = JSON.parse(buf.toString());
         info.setScore(2100);
+
         if (msg.action === "myGameFunction") {
-            myGameFunction(msg.data); // Call the function you want
+            myGameFunction(msg.data);
         }
     });
 
@@ -32,5 +39,4 @@ namespace web {
         console.log("Game function called with data: " + data);
         // Perform specific game actions here
     }
-    
 }
