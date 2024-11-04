@@ -1,5 +1,5 @@
-// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.56/---simulator","cdnUrl":"https://pxt.azureedge.net","version":"0.0.19","target":"arcade","targetVersion":"1.12.56","repo":"sallyselva/mohan"}
-// total=1799735 new=6.48% cached=88.59% other=4.93%
+// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.56/---simulator","cdnUrl":"https://pxt.azureedge.net","version":"0.0.20","target":"arcade","targetVersion":"1.12.56","repo":"sallyselva/mohan"}
+// total=1799733 new=6.48% cached=88.59% other=4.93%
 (function (ectx) {
 'use strict';
 const runtime = ectx.runtime;
@@ -539,7 +539,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P53070(s) {
+function _main___P53435(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -974,10 +974,10 @@ switch (step) {
     s.callLocIdx = 67; s.pc = 40; return s.tmp_0;
   case 40:
     r0 = s.retval;
-    globals.CHANNEL___52737 = ("web");
+    globals.CHANNEL___53275 = ("web");
     s.tmp_0 = control_simmessages_onReceived__P23928_mk(s);
-    s.tmp_0.arg0 = globals.CHANNEL___52737;
-    s.tmp_0.arg1 = web_inline__P52764;
+    s.tmp_0.arg0 = globals.CHANNEL___53275;
+    s.tmp_0.arg1 = web_inline__P53302;
     s.callLocIdx = 78; s.pc = 41; return s.tmp_0;
   case 41:
     r0 = s.retval;
@@ -1052,13 +1052,13 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-_main___P53070.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
-_main___P53070.continuations = [  ]
+_main___P53435.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
+_main___P53435.continuations = [  ]
 
-function _main___P53070_mk(s) {
+function _main___P53435_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P53070, depth: s.depth + 1,
+        parent: s, fn: _main___P53435, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -1601,7 +1601,7 @@ function gameOverConfig_inline__P28415_mk(s) {
 
 
 
-function web_inline__P52764(s) {
+function web_inline__P53302(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1611,7 +1611,7 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.msg___52766 = undefined;
+    s.msg___53304 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.lambdaArgs = null;
@@ -1622,9 +1622,9 @@ switch (step) {
     s.callLocIdx = 71; s.pc = 5; return s.tmp_0;
   case 5:
     r0 = s.retval;
-    s.msg___52766 = (r0);
+    s.msg___53304 = (r0);
     s.tmp_2 = if_action_1_mk(s);
-    s.tmp_2.arg0 = s.msg___52766;
+    s.tmp_2.arg0 = s.msg___53304;
     if (!s.tmp_2.arg0.vtable.iface) {
       s.retval = pxsim_pxtrt.mapGetByString(s.tmp_2.arg0, "action");
     } else {
@@ -1640,9 +1640,9 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 1; continue; }
-    s.tmp_3 = web_handleReceivedScore__P52777_mk(s);
+    s.tmp_3 = web_handleReceivedScore__P53315_mk(s);
     s.tmp_4 = if_score_1_mk(s);
-    s.tmp_4.arg0 = s.msg___52766;
+    s.tmp_4.arg0 = s.msg___53304;
     if (!s.tmp_4.arg0.vtable.iface) {
       s.retval = pxsim_pxtrt.mapGetByString(s.tmp_4.arg0, "score");
     } else {
@@ -1660,7 +1660,7 @@ switch (step) {
     { step = 4; continue; }
   case 1:
     s.tmp_2 = if_action_1_mk(s);
-    s.tmp_2.arg0 = s.msg___52766;
+    s.tmp_2.arg0 = s.msg___53304;
     if (!s.tmp_2.arg0.vtable.iface) {
       s.retval = pxsim_pxtrt.mapGetByString(s.tmp_2.arg0, "action");
     } else {
@@ -1676,9 +1676,9 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_numops_toBoolDecr(s.tmp_0);
     if (!r0) { step = 2; continue; }
-    s.tmp_3 = web_open__P52754_mk(s);
+    s.tmp_3 = web_open__P53292_mk(s);
     s.tmp_4 = if_url_1_mk(s);
-    s.tmp_4.arg0 = s.msg___52766;
+    s.tmp_4.arg0 = s.msg___53304;
     if (!s.tmp_4.arg0.vtable.iface) {
       s.retval = pxsim_pxtrt.mapGetByString(s.tmp_4.arg0, "url");
     } else {
@@ -1700,19 +1700,19 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-web_inline__P52764.info = {"start":532,"length":239,"line":23,"column":44,"endLine":30,"endColumn":5,"fileName":"test.ts","functionName":"inline","argumentNames":["buf"]}
+web_inline__P53302.info = {"start":532,"length":239,"line":23,"column":44,"endLine":30,"endColumn":5,"fileName":"test.ts","functionName":"inline","argumentNames":["buf"]}
 
-function web_inline__P52764_mk(s) {
+function web_inline__P53302_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: web_inline__P52764, depth: s.depth + 1,
+        parent: s, fn: web_inline__P53302, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
   tmp_2: undefined,
   tmp_3: undefined,
   tmp_4: undefined,
-  msg___52766: undefined,
+  msg___53304: undefined,
   arg0: undefined,
 } }
 
@@ -1822,12 +1822,12 @@ switch (step) {
   case 8:
     r0 = s.retval;
     s.finalScore___52817 = (r0);
-    s.tmp_0 = web_sendScore__P52758_mk(s);
+    s.tmp_0 = web_sendScore__P53296_mk(s);
     s.tmp_0.arg0 = s.finalScore___52817;
     s.callLocIdx = 89; s.pc = 9; return s.tmp_0;
   case 9:
     r0 = s.retval;
-    s.tmp_0 = web_open__P52754_mk(s);
+    s.tmp_0 = web_open__P53292_mk(s);
     if ((s.finalScore___52817) && (s.finalScore___52817).vtable) {
     setupResume(s, 11);
     pxsim_String__stringConv(s.finalScore___52817);
@@ -27547,7 +27547,7 @@ function music_Melody_constructor__P25126_mk(s) {
 
 
 
-function web_sendScore__P52758(s) {
+function web_sendScore__P53296(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -27565,7 +27565,7 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt.mapSetByString(s.tmp_0, "action", "sendScore");
     r0 = pxsim_pxtrt.mapSetByString(s.tmp_0, "score", s.arg0);
-    s.tmp_1 = web_sendJSON__P52739_mk(s);
+    s.tmp_1 = web_sendJSON__P53277_mk(s);
     s.tmp_1.arg0 = s.tmp_0;
     s.callLocIdx = 70; s.pc = 1; return s.tmp_1;
   case 1:
@@ -27574,12 +27574,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-web_sendScore__P52758.info = {"start":349,"length":137,"line":16,"column":4,"endLine":21,"endColumn":5,"fileName":"test.ts","functionName":"sendScore","argumentNames":["score"]}
+web_sendScore__P53296.info = {"start":349,"length":137,"line":16,"column":4,"endLine":21,"endColumn":5,"fileName":"test.ts","functionName":"sendScore","argumentNames":["score"]}
 
-function web_sendScore__P52758_mk(s) {
+function web_sendScore__P53296_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: web_sendScore__P52758, depth: s.depth + 1,
+        parent: s, fn: web_sendScore__P53296, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -27590,7 +27590,7 @@ function web_sendScore__P52758_mk(s) {
 
 
 
-function web_sendJSON__P52739(s) {
+function web_sendJSON__P53277(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -27600,8 +27600,8 @@ if (yieldSteps-- < 0 && maybeYield(s, step, r0) || runtime !== pxsim.runtime) re
 switch (step) {
   case 0:
 
-    s.msg___52741 = undefined;
-    s.buf___52745 = undefined;
+    s.msg___53279 = undefined;
+    s.buf___53283 = undefined;
     if (s.lambdaArgs) {
       s.arg0 = (s.lambdaArgs[0]);
       s.lambdaArgs = null;
@@ -27613,24 +27613,24 @@ switch (step) {
     s.callLocIdx = 68; s.pc = 1; return s.tmp_0;
   case 1:
     r0 = s.retval;
-    s.msg___52741 = (r0);
-    r0 = pxsim.control.createBufferFromUTF8(s.msg___52741);
-    s.buf___52745 = (r0);
-    r0 = pxsim_pxtcore.sendMessage(globals.CHANNEL___52737, s.buf___52745, undefined);
+    s.msg___53279 = (r0);
+    r0 = pxsim.control.createBufferFromUTF8(s.msg___53279);
+    s.buf___53283 = (r0);
+    r0 = pxsim_pxtcore.sendMessage(globals.CHANNEL___53275, s.buf___53283, undefined);
     r0 = undefined;
     return leave(s, r0)
   default: oops()
 } } }
-web_sendJSON__P52739.info = {"start":48,"length":168,"line":3,"column":4,"endLine":7,"endColumn":5,"fileName":"test.ts","functionName":"sendJSON","argumentNames":["json"]}
+web_sendJSON__P53277.info = {"start":48,"length":168,"line":3,"column":4,"endLine":7,"endColumn":5,"fileName":"test.ts","functionName":"sendJSON","argumentNames":["json"]}
 
-function web_sendJSON__P52739_mk(s) {
+function web_sendJSON__P53277_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: web_sendJSON__P52739, depth: s.depth + 1,
+        parent: s, fn: web_sendJSON__P53277, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
-  msg___52741: undefined,
-  buf___52745: undefined,
+  msg___53279: undefined,
+  buf___53283: undefined,
   arg0: undefined,
 } }
 
@@ -31704,7 +31704,7 @@ function helpers__registerFactory__P26829_mk(s) {
 
 
 
-function web_open__P52754(s) {
+function web_open__P53292(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -31722,7 +31722,7 @@ switch (step) {
     s.tmp_0 = r0;
     r0 = pxsim_pxtrt.mapSetByString(s.tmp_0, "action", "open");
     r0 = pxsim_pxtrt.mapSetByString(s.tmp_0, "url", s.arg0);
-    s.tmp_1 = web_sendJSON__P52739_mk(s);
+    s.tmp_1 = web_sendJSON__P53277_mk(s);
     s.tmp_1.arg0 = s.tmp_0;
     s.callLocIdx = 69; s.pc = 1; return s.tmp_1;
   case 1:
@@ -31731,12 +31731,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-web_open__P52754.info = {"start":222,"length":121,"line":9,"column":4,"endLine":14,"endColumn":5,"fileName":"test.ts","functionName":"open","argumentNames":["url"]}
+web_open__P53292.info = {"start":222,"length":121,"line":9,"column":4,"endLine":14,"endColumn":5,"fileName":"test.ts","functionName":"open","argumentNames":["url"]}
 
-function web_open__P52754_mk(s) {
+function web_open__P53292_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: web_open__P52754, depth: s.depth + 1,
+        parent: s, fn: web_open__P53292, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -31747,7 +31747,7 @@ function web_open__P52754_mk(s) {
 
 
 
-function web_handleReceivedScore__P52777(s) {
+function web_handleReceivedScore__P53315(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -31762,7 +31762,7 @@ switch (step) {
       s.lambdaArgs = null;
     }
     s.tmp_0 = info_setScore__P26069_mk(s);
-    s.tmp_0.arg0 = s.arg0;
+    s.tmp_0.arg0 = 1000;
     s.callLocIdx = 79; s.pc = 1; return s.tmp_0;
   case 1:
     r0 = s.retval;
@@ -31785,12 +31785,12 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-web_handleReceivedScore__P52777.info = {"start":779,"length":130,"line":32,"column":4,"endLine":35,"endColumn":5,"fileName":"test.ts","functionName":"handleReceivedScore","argumentNames":["score"]}
+web_handleReceivedScore__P53315.info = {"start":779,"length":129,"line":32,"column":4,"endLine":35,"endColumn":5,"fileName":"test.ts","functionName":"handleReceivedScore","argumentNames":["score"]}
 
-function web_handleReceivedScore__P52777_mk(s) {
+function web_handleReceivedScore__P53315_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: web_handleReceivedScore__P52777, depth: s.depth + 1,
+        parent: s, fn: web_handleReceivedScore__P53315, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -60679,7 +60679,7 @@ const sprites_BaseSpriteSayRenderer__C25756_VT = mkVTable({
   },
 });
 
-const breakpoints = setupDebugger(1, ["CHANNEL___52737","transparency16___27834","hero___52858","clover___52853","bee___52851"])
+const breakpoints = setupDebugger(1, ["CHANNEL___53275","transparency16___27834","hero___52858","clover___52853","bee___52851"])
 
-return _main___P53070
+return _main___P53435
 })
