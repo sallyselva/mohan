@@ -1,6 +1,5 @@
 {
     "name": "mohan",
-    "version": "0.0.16",
     "dependencies": {
         "device": "*"
     },
@@ -24,5 +23,4 @@
         "arcade"
     ],
     "preferredEditor": "tsprj"
-    "disableTargetTemplateFiles": true
 }
