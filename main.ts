@@ -181,14 +181,14 @@ namespace web {
         const msg = JSON.stringify(json);
         const buf = Buffer.fromUTF8(msg);
         //onMessageReceived(msg);
-        control.simmessages.send(CHANNEL, buf,true);
+        control.simmessages.send(CHANNEL, buf,false);
     }
     function onMessageReceived(receivedMessage: string) {
         console.log("Simulated message received: " + receivedMessage);
 
         // Parse the JSON message
         const msg = JSON.parse(receivedMessage);
-        if (msg.action === "open") {
+        if (msg.action == "open") {
             console.log("Score:"+ msg.data.score);
         }
     }
