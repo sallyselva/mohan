@@ -167,11 +167,11 @@ controller.moveSprite(hero)
 hero.setStayInScreen(true)
 info.setScore(0)
 info.setLife(1)
-control.simmessages.onReceived("web", (buf: Buffer) => {
-    console.log("Make Code Message received:"+  buf.toString());
-});
-console.log("Sending message from Game with Test Score");
-web.sendScore(1234);
+//control.simmessages.onReceived("web", (buf: Buffer) => {
+//    console.log("Make Code Message received:"+  buf.toString());
+//});
+//console.log("Sending message from Game with Test Score");
+//web.sendScore(1234);
 namespace web {
     const CHANNEL = "web";
 
@@ -194,7 +194,7 @@ namespace web {
         const msg2 = JSON.parse(buf.toString());
         if (msg2.action === "sendScore") {
             handleReceivedScore(msg2.score);
-        } else if (msg2.action === "myGameFunction") {
+        } else if (msg2.action === "open") {
             myGameFunction(msg2.data);
         }
     });
