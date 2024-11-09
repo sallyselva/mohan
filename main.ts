@@ -179,19 +179,30 @@ namespace web {
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
+    
+    control.simmessages.onReceived("1", (buf: Buffer) => {
+        try {
+            console.log("Raw buffer received:"+ buf);
+            console.log("Received message: " + buf.toString());
+        } catch (receiveError) {
+            console.error("Error processing received message:"+ receiveError);
+        }
+    });
+
     let msg = "Hello, world!";
     let buf = Buffer.fromUTF8(msg);
-    console.log("Sending");
-    try {
-        control.simmessages.send("1", buf, false);
-        console.log("Message sent");
-    } catch (sendError) {
-        console.error("Error sending message:" + sendError);
-    }
+    console.log("Sending message:"+ msg);
 
-    control.simmessages.onReceived("1", (buf: Buffer) => {
-        console.log("Received message: " + buf.toString());
-    });
+    // Add a delay before sending
+    setTimeout(() => {
+        try {
+            control.simmessages.send("1", buf, false);
+            console.log("Message sent");
+        } catch (sendError) {
+            console.error("Error sending message:"+ sendError);
+        }
+    }, 1000);  // delay 1 second (adjust as needed)
+
     
     function sendJSON(json: any) {
         //const msg = JSON.stringify(json);
