@@ -3,7 +3,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
     info.changeLifeBy(-1)
     // game.over(false)
-    if (info.life() != 0) {
+    if (info.life() == 0) {
         //finalScore = info.score()
         //web.sendScore(finalScore);
         console.log("Sending open message with URL in Life End");
@@ -175,7 +175,7 @@ info.setLife(4)
 //web.sendScore(1234);
 
 namespace web {
-    radio.setGroup(1);
+    
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
@@ -202,7 +202,11 @@ namespace web {
         control.simmessages.send(CHANNEL, buf,false);
 
     }
-    
+    let msg = "Hello, world!";
+    let buf = Buffer.fromUTF8(msg);
+    console.log("Sending");
+    control.simmessages.send("1", buf, false);
+    console.log("Send");
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
     }
