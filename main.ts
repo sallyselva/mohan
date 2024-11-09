@@ -184,7 +184,9 @@ namespace web {
         //onMessageReceived(msg);
         let message = JSON.stringify({ action: "open", data: { score: 1000 } });
         radio.sendString(message);
+        console.log("radio is called:");
         control.simmessages.send(CHANNEL, buf,false);
+
     }
     radio.onReceivedString(function (receivedString: string) {
         console.log("Radio Received message:"+ receivedString);
