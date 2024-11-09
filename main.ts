@@ -167,7 +167,7 @@ let hero = sprites.create(img`
 controller.moveSprite(hero)
 hero.setStayInScreen(true)
 info.setScore(0)
-info.setLife(1)
+info.setLife(4)
 //control.simmessages.onReceived("web", (buf: Buffer) => {
 //    console.log("Make Code Message received:"+  buf.toString());
 //});
