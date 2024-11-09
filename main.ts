@@ -175,23 +175,26 @@ info.setLife(1)
 //web.sendScore(1234);
 
 namespace web {
+    radio.setGroup(1);
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     function sendJSON(json: any) {
         const msg = JSON.stringify(json);
         const buf = Buffer.fromUTF8(msg);
         //onMessageReceived(msg);
+        let message = JSON.stringify({ action: "open", data: { score: 1000 } });
+        radio.sendString(message);
         control.simmessages.send(CHANNEL, buf,false);
     }
-    function onMessageReceived(receivedMessage: string) {
-        console.log("Simulated message received: " + receivedMessage);
+    radio.onReceivedString(function (receivedString: string) {
+        console.log("Radio Received message:"+ receivedString);
 
-        // Parse the JSON message
-        const msg = JSON.parse(receivedMessage);
-        if (msg.action == "open") {
-            console.log("Score:"+ msg.data.score);
+        // You can add more logic to process the message
+        let msg = JSON.parse(receivedString); // Assuming you sent a JSON string
+        if (msg.action === "open") {
+            console.log("Action is open. Score:"+ msg.data.score);
         }
-    }
+    });
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
     }

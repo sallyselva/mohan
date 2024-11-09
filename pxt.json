@@ -3,7 +3,8 @@
     "version": "0.0.29",
     "dependencies": {
         "device": "*",
-        "animation": "*"
+        "animation": "*",
+        "radio": "*"
     },
     "files": [
         ".vscode/extensions.json",
