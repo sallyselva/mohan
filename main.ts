@@ -179,7 +179,7 @@ namespace web {
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
-    console.log("Sim messages setup:"+ control.simmessages);
+    
     
     function sendJSON(json: any) {
         //const msg = JSON.stringify(json);
