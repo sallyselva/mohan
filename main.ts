@@ -3,7 +3,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
     info.changeLifeBy(-1)
     // game.over(false)
-    if (info.life() == 0) {
+    if (info.life() != 0) {
         //finalScore = info.score()
         //web.sendScore(finalScore);
         console.log("Sending open message with URL in Life End");
