@@ -179,17 +179,10 @@ namespace web {
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
-    
-    control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
-        console.log("receiving message on CHANNEL: " + CHANNEL);
-        console.log("Message received in MakeCode:" + buf.toString());
-        const msg2 = JSON.parse(buf.toString());
-        if (msg2.action == "sendScore") {
-            handleReceivedScore(msg2.score);
-        } else if (msg2.action == "open") {
-            myGameFunction(msg2.data);
-        }
+    control.simmessages.onReceived("1", (buf: Buffer) => {
+        console.log("Received message: " + buf.toString());
     });
+    
     function sendJSON(json: any) {
         //const msg = JSON.stringify(json);
         const msg = "Hello, MakeCode!";
