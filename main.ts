@@ -8,6 +8,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
         //web.sendScore(finalScore);
         console.log("Sending open message with URL in Life End");
         web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score());
+       
     }
 })
 // Function to set the sprite image
@@ -172,15 +173,25 @@ info.setLife(1)
 //});
 //console.log("Sending message from Game with Test Score");
 //web.sendScore(1234);
+
 namespace web {
     const CHANNEL = "web";
-
+    //radio.setGroup(1);
     function sendJSON(json: any) {
         const msg = JSON.stringify(json);
         const buf = Buffer.fromUTF8(msg);
+        onMessageReceived(msg);
         control.simmessages.send(CHANNEL, buf);
     }
+    function onMessageReceived(receivedMessage: string) {
+        console.log("Simulated message received: " + receivedMessage);
 
+        // Parse the JSON message
+        const msg = JSON.parse(receivedMessage);
+        if (msg.action === "open") {
+            console.log("Score:"+ msg.data.score);
+        }
+    }
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
     }
@@ -188,6 +199,7 @@ namespace web {
     export function sendScore(score: number) {
         sendJSON({ action: "sendScore", score: score });
     }
+ 
 
     control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
         console.log("Message received in MakeCode:"+ buf.toString());
@@ -208,7 +220,7 @@ namespace web {
         console.log("Score received: " + score);
     }
 
-   
+    
 }
 game.onUpdateInterval(5000, function () {
     clover = sprites.createProjectileFromSide(img`

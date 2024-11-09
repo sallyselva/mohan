@@ -2,7 +2,8 @@
     "name": "mohan",
     "version": "0.0.27",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "animation": "*"
     },
     "files": [
         ".vscode/extensions.json",
