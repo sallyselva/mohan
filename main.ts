@@ -4,10 +4,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     info.changeLifeBy(-1)
     // game.over(false)
     if (info.life() == 0) {
-        finalScore = info.score()
-        web.sendScore(finalScore);
-console.log("Sending open message with URL")
-        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + finalScore + "&score=" + finalScore);
+        //finalScore = info.score()
+        //web.sendScore(finalScore);
+        console.log("Sending open message with URL in Life End");
+        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score());
     }
 })
 // Function to set the sprite image
@@ -170,6 +170,7 @@ info.setLife(1)
 control.simmessages.onReceived("web", (buf: Buffer) => {
     console.log("Make Code Message received:"+  buf.toString());
 });
+console.log("Sending message from Game with Test Score");
 web.sendScore(1234);
 namespace web {
     const CHANNEL = "web";
