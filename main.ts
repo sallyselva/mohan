@@ -179,6 +179,16 @@ namespace web {
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
+    let msg = "Hello, world!";
+    let buf = Buffer.fromUTF8(msg);
+    console.log("Sending");
+    try {
+        control.simmessages.send("1", buf, false);
+        console.log("Message sent");
+    } catch (sendError) {
+        console.error("Error sending message:" + sendError);
+    }
+
     control.simmessages.onReceived("1", (buf: Buffer) => {
         console.log("Received message: " + buf.toString());
     });
@@ -195,11 +205,7 @@ namespace web {
         control.simmessages.send(CHANNEL, buf,false);
 
     }
-    let msg = "Hello, world!";
-    let buf = Buffer.fromUTF8(msg);
-    console.log("Sending");
-    control.simmessages.send("1", buf, false);
-    console.log("Send");
+    
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
     }
