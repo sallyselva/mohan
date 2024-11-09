@@ -178,13 +178,18 @@ namespace web {
     radio.setGroup(1);
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
+    console.log("Current CHANNEL:"+ CHANNEL);
+    console.log("Sim messages setup:"+ control.simmessages);
+    
     function sendJSON(json: any) {
-        const msg = JSON.stringify(json);
+        //const msg = JSON.stringify(json);
+        const msg = "Hello, MakeCode!";
         const buf = Buffer.fromUTF8(msg);
         //onMessageReceived(msg);
-        let message = JSON.stringify({ action: "open", data: { score: 1000 } });
-        radio.sendString(message);
+        //let message = JSON.stringify({ action: "open", data: { score: 1000 } });
+        //radio.sendString(message);
         console.log("radio is called:");
+        console.log("Sending message on CHANNEL: " + CHANNEL);
         control.simmessages.send(CHANNEL, buf,false);
 
     }
@@ -207,6 +212,7 @@ namespace web {
  
 
     control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
+        console.log("receiving message on CHANNEL: " + CHANNEL);
         console.log("Message received in MakeCode:"+ buf.toString());
         const msg2 = JSON.parse(buf.toString());
         if (msg2.action == "sendScore") {
