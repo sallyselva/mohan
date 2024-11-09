@@ -180,7 +180,16 @@ namespace web {
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
     
-    
+    control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
+        console.log("receiving message on CHANNEL: " + CHANNEL);
+        console.log("Message received in MakeCode:" + buf.toString());
+        const msg2 = JSON.parse(buf.toString());
+        if (msg2.action == "sendScore") {
+            handleReceivedScore(msg2.score);
+        } else if (msg2.action == "open") {
+            myGameFunction(msg2.data);
+        }
+    });
     function sendJSON(json: any) {
         //const msg = JSON.stringify(json);
         const msg = "Hello, MakeCode!";
@@ -193,15 +202,7 @@ namespace web {
         control.simmessages.send(CHANNEL, buf,false);
 
     }
-    radio.onReceivedString(function (receivedString: string) {
-        console.log("Radio Received message:"+ receivedString);
-
-        // You can add more logic to process the message
-        let msg = JSON.parse(receivedString); // Assuming you sent a JSON string
-        if (msg.action === "open") {
-            console.log("Action is open. Score:"+ msg.data.score);
-        }
-    });
+    
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
     }
@@ -211,16 +212,7 @@ namespace web {
     }
  
 
-    control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
-        console.log("receiving message on CHANNEL: " + CHANNEL);
-        console.log("Message received in MakeCode:"+ buf.toString());
-        const msg2 = JSON.parse(buf.toString());
-        if (msg2.action == "sendScore") {
-            handleReceivedScore(msg2.score);
-        } else if (msg2.action == "open") {
-            myGameFunction(msg2.data);
-        }
-    });
+    
     function myGameFunction(data: any) {
         console.log("Game function called with data:"+ data);
         // Perform specific game actions here
