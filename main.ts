@@ -6,8 +6,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
     if (info.life() == 0) {
         //finalScore = info.score()
         //web.sendScore(finalScore);
-        console.log("Sending open message with URL in Life End");
-        web.open("https://115.111.238.147:889/api/ECommReflection?playername=" + info.score() + "&score=" + info.score());
+        console.log("Sending open message with URL in Life End"+info.score());
+        web.open("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score=" + info.score());
        
     }
 })
@@ -179,30 +179,6 @@ namespace web {
     const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
-    
-    control.simmessages.onReceived("1", (buf: Buffer) => {
-        try {
-            console.log("Raw buffer received:"+ buf);
-            console.log("Received message: " + buf.toString());
-        } catch (receiveError) {
-            console.error("Error processing received message:"+ receiveError);
-        }
-    });
-
-    let msg = "Hello, world!";
-    let buf = Buffer.fromUTF8(msg);
-    console.log("Sending message:"+ msg);
-
-    // Add a delay before sending
-    setTimeout(() => {
-        try {
-            control.simmessages.send("1", buf, false);
-            console.log("Message sent");
-        } catch (sendError) {
-            console.error("Error sending message:"+ sendError);
-        }
-    }, 1000);  // delay 1 second (adjust as needed)
-
     
     function sendJSON(json: any) {
         //const msg = JSON.stringify(json);
