@@ -175,13 +175,13 @@ info.setLife(1)
 //web.sendScore(1234);
 
 namespace web {
-    const CHANNEL = "web";
+    const CHANNEL = "1";//"web";
     //radio.setGroup(1);
     function sendJSON(json: any) {
         const msg = JSON.stringify(json);
         const buf = Buffer.fromUTF8(msg);
-        onMessageReceived(msg);
-        control.simmessages.send(CHANNEL, buf);
+        //onMessageReceived(msg);
+        control.simmessages.send(CHANNEL, buf,true);
     }
     function onMessageReceived(receivedMessage: string) {
         console.log("Simulated message received: " + receivedMessage);
