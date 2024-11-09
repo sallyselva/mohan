@@ -192,9 +192,9 @@ namespace web {
     control.simmessages.onReceived(CHANNEL, (buf: Buffer) => {
         console.log("Message received in MakeCode:"+ buf.toString());
         const msg2 = JSON.parse(buf.toString());
-        if (msg2.action === "sendScore") {
+        if (msg2.action == "sendScore") {
             handleReceivedScore(msg2.score);
-        } else if (msg2.action === "open") {
+        } else if (msg2.action == "open") {
             myGameFunction(msg2.data);
         }
     });
