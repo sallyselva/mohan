@@ -13,7 +13,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
         //finalScore = info.score()
         //web.sendScore(finalScore);
         console.log("Sending open message with URL in Life End"+info.score());
-        web.open("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score=" + info.score());
+        //web.open("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score=" + info.score());
        
     }
 })
@@ -187,6 +187,23 @@ namespace web {
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
     
+    export function getJSON(url: string, callback: (response: any) => void) {
+        // Create the request
+        control.simmessages.send(CHANNEL, control.createBufferFromUTF8(`GET ${url}`));
+
+        // Register an event listener to handle the response.
+        control.simmessages.onReceived(CHANNEL, (responseBuf) => {
+            const responseText = responseBuf.toString();
+            try {
+                // Attempt to parse as JSON
+                const jsonResponse = JSON.parse(responseText);
+                callback(jsonResponse);
+            } catch (error) {
+                console.log("Failed to parse JSON: " + error);
+            }
+        });
+    }
+    
     function sendJSON(json: any) {
         const msg = JSON.stringify(json);
         //const msg = "Hello, MakeCode!";
@@ -226,8 +243,19 @@ namespace web {
     
 }
 //game.GameOverPlayerScore(){}
-
+let lastScoreProcessed = -1;
 game.onUpdateInterval(5000, function () {
+    if(info.life() == 0)
+    {
+        web.getJSON("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score="+info.score(), function (response) {
+            // Parse server response
+            if (response.status === 'success' && response.score > lastScoreProcessed) {
+                lastScoreProcessed = response.score;
+                console.log("Server processed score: " + response.score);
+                game.splash("Score processed: " + response.score);
+            }
+        });
+    }
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
         .......bbb331111333333bbb.......
