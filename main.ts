@@ -1,3 +1,9 @@
+const CHANNEL = "1";//"web";
+control.simmessages.onReceived(CHANNEL, (receivedBuf) => {
+    console.log("REceiving message on CHANNEL: " + CHANNEL);
+    let message = receivedBuf.toString(); game.splash("Received message: " + message);
+});
+
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherSprite2) {
     sprites.destroy(otherSprite2, effects.spray, 100)
     music.play(music.melodyPlayable(music.siren), music.PlaybackMode.UntilDone)
@@ -176,7 +182,7 @@ info.setLife(4)
 
 namespace web {
     
-    const CHANNEL = "1";//"web";
+    
     //radio.setGroup(1);
     console.log("Current CHANNEL:"+ CHANNEL);
     
@@ -195,9 +201,6 @@ namespace web {
 
     }
 
-    control.simmessages.onReceived(CHANNEL, (receivedBuf) => { 
-        console.log("REceiving message on CHANNEL: " + CHANNEL);
-        let message = receivedBuf.toString(); game.splash("Received message: " + message); });
     
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
@@ -222,6 +225,7 @@ namespace web {
     
 }
 game.onUpdateInterval(5000, function () {
+    console.log("Polling for messages...");
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
         .......bbb331111333333bbb.......
