@@ -196,6 +196,7 @@ namespace web {
         control.simmessages.onReceived(CHANNEL, (responseBuf) => {
             console.log("step 3");
             const responseText = responseBuf.toString();
+            console.log("step 4 " + responseText);
             try {
                 // Attempt to parse as JSON
                 const jsonResponse = JSON.parse(responseText);
