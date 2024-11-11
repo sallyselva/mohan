@@ -195,7 +195,9 @@ namespace web {
 
     }
 
-    control.simmessages.onReceived(CHANNEL, (receivedBuf) => { let message = receivedBuf.toString(); game.splash("Received message: " + message); });
+    control.simmessages.onReceived(CHANNEL, (receivedBuf) => { 
+        console.log("REceiving message on CHANNEL: " + CHANNEL);
+        let message = receivedBuf.toString(); game.splash("Received message: " + message); });
     
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
