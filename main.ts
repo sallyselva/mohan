@@ -27,6 +27,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     music.play(music.melodyPlayable(music.magicWand), music.PlaybackMode.UntilDone)
     info.changeScoreBy(1)
 })
+let lastReceivedMessage = "";
 let bee: Sprite = null
 let clover: Sprite = null
 let finalScore = 0
@@ -225,24 +226,10 @@ namespace web {
     
 }
 //game.GameOverPlayerScore(){}
-let receivedMessage: string = ""
+game.onUpdate(function () {
+    control.simmessages.send("1", control.createBufferFromUTF8('{"action":"open","url":""https://115.111.238.147:889/api/ECommReflection?playername=kapir&score=4"}'), false);
+});
 game.onUpdateInterval(5000, function () {
-    if (receivedMessage) {
-        console.log("Polling message:"+ receivedMessage);
-        try {
-            const data = JSON.parse(receivedMessage);
-            // Handle the message based on action or other content
-            if (data.action === "open" && data.data && data.data.score) {
-                info.setScore(data.data.score);
-                console.log("Score updated to:"+ data.data.score);
-            }
-            // Clear the message after processing
-            receivedMessage = "";
-        } catch (e) {
-            console.log("Error parsing message:"+ e);
-        }
-    }
-    console.log("Polling for messages...");
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
         .......bbb331111333333bbb.......
