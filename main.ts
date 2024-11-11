@@ -183,7 +183,8 @@ namespace web {
     function sendJSON(json: any) {
         const msg = JSON.stringify(json);
         
-        const buf = Buffer.fromUTF8(msg);
+        //const buf = Buffer.fromUTF8(msg);
+        let buf = control.createBufferFromUTF8("Hello");
         //onMessageReceived(msg);
         //let message = JSON.stringify({ action: "open", data: { score: 1000 } });
         //radio.sendString(message);
@@ -192,6 +193,8 @@ namespace web {
         control.simmessages.send(CHANNEL, buf,false);
 
     }
+
+    control.simmessages.onReceived(CHANNEL, (receivedBuf) => { let message = receivedBuf.toString(); game.splash("Received message: " + message); });
     
     export function open(url: string) {
         sendJSON({ action: "open", url: url });
