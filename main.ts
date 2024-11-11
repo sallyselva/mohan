@@ -189,10 +189,12 @@ namespace web {
     
     export function getJSON(url: string, callback: (response: any) => void) {
         // Create the request
-        control.simmessages.send(CHANNEL, control.createBufferFromUTF8(`GET ${url}`));
-
+        console.log("step 1");
+        control.simmessages.send(CHANNEL, control.createBufferFromUTF8('GET ${url}'));
+        console.log("step 2");
         // Register an event listener to handle the response.
         control.simmessages.onReceived(CHANNEL, (responseBuf) => {
+            console.log("step 3");
             const responseText = responseBuf.toString();
             try {
                 // Attempt to parse as JSON
@@ -245,17 +247,18 @@ namespace web {
 //game.GameOverPlayerScore(){}
 let lastScoreProcessed = -1;
 game.onUpdateInterval(5000, function () {
-    if(info.life() == 0)
-    {
+    //if(info.life() == 0)
+    //{
         web.getJSON("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score="+info.score(), function (response) {
             // Parse server response
+            console.log("received");
             if (response.status === 'success' && response.score > lastScoreProcessed) {
                 lastScoreProcessed = response.score;
                 console.log("Server processed score: " + response.score);
                 game.splash("Score processed: " + response.score);
             }
         });
-    }
+    //}
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
         .......bbb331111333333bbb.......
