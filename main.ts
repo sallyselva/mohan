@@ -181,10 +181,10 @@ namespace web {
     console.log("Current CHANNEL:"+ CHANNEL);
     
     function sendJSON(json: any) {
-        const msg = JSON.stringify(json);
-        
+        //const msg = JSON.stringify(json);
+        const msg = "Hello, MakeCode!";
         //const buf = Buffer.fromUTF8(msg);
-        let buf = control.createBufferFromUTF8("Hello");
+        let buf = control.createBufferFromUTF8(msg);
         //onMessageReceived(msg);
         //let message = JSON.stringify({ action: "open", data: { score: 1000 } });
         //radio.sendString(message);
