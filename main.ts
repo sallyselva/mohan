@@ -14,6 +14,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherS
         //web.sendScore(finalScore);
         console.log("Sending open message with URL in Life End"+info.score());
         //web.open("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score=" + info.score());
+        web.getJSON("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score=" + info.score(), function (response) {
+            // Parse server response
+            console.log("received");
+            if (response.status === 'success' && response.score > lastScoreProcessed) {
+                lastScoreProcessed = response.score;
+                console.log("Server processed score: " + response.score);
+                game.splash("Score processed: " + response.score);
+            }
+        });
        
     }
 })
@@ -216,9 +225,6 @@ namespace web {
         //onMessageReceived(msg);
         //let message = JSON.stringify({ action: "open", data: { score: 1000 } });
         //radio.sendString(message);
-        console.log("Buffer (hex):"+ buf.toHex()); // Logs buffer in hexadecimal format
-        console.log("Buffer (string):"+ buf.toString());
-        console.log("Sending message on CHANNEL: " + CHANNEL);
         control.simmessages.send(CHANNEL, buf,false);
 
     }
@@ -247,19 +253,12 @@ namespace web {
     
 }
 //game.GameOverPlayerScore(){}
+
 let lastScoreProcessed = -1;
 game.onUpdateInterval(5000, function () {
     //if(info.life() == 0)
     //{
-        web.getJSON("https://115.111.238.147:889/api/ECommReflection?playername=kapir&score="+info.score(), function (response) {
-            // Parse server response
-            console.log("received");
-            if (response.status === 'success' && response.score > lastScoreProcessed) {
-                lastScoreProcessed = response.score;
-                console.log("Server processed score: " + response.score);
-                game.splash("Score processed: " + response.score);
-            }
-        });
+        
     //}
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
