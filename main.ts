@@ -224,7 +224,24 @@ namespace web {
 
     
 }
+//game.GameOverPlayerScore(){}
+let receivedMessage: string = ""
 game.onUpdateInterval(5000, function () {
+    if (receivedMessage) {
+        console.log("Polling message:"+ receivedMessage);
+        try {
+            const data = JSON.parse(receivedMessage);
+            // Handle the message based on action or other content
+            if (data.action === "open" && data.data && data.data.score) {
+                info.setScore(data.data.score);
+                console.log("Score updated to:"+ data.data.score);
+            }
+            // Clear the message after processing
+            receivedMessage = "";
+        } catch (e) {
+            console.log("Error parsing message:"+ e);
+        }
+    }
     console.log("Polling for messages...");
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
