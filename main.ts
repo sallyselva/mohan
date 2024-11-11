@@ -188,7 +188,8 @@ namespace web {
         //onMessageReceived(msg);
         //let message = JSON.stringify({ action: "open", data: { score: 1000 } });
         //radio.sendString(message);
-        console.log("radio is called:" + buf);
+        console.log("Buffer (hex):"+ buf.toHex()); // Logs buffer in hexadecimal format
+        console.log("Buffer (string):"+ buf.toString());
         console.log("Sending message on CHANNEL: " + CHANNEL);
         control.simmessages.send(CHANNEL, buf,false);
 
