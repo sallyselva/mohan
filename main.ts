@@ -226,9 +226,7 @@ namespace web {
     
 }
 //game.GameOverPlayerScore(){}
-game.onUpdate(function () {
-    control.simmessages.send("1", control.createBufferFromUTF8('{"action":"open","url":""https://115.111.238.147:889/api/ECommReflection?playername=kapir&score=4"}'), false);
-});
+
 game.onUpdateInterval(5000, function () {
     clover = sprites.createProjectileFromSide(img`
         ..........bbbbbbbbbbbb..........
