@@ -190,7 +190,8 @@ namespace web {
     export function getJSON(url: string, callback: (response: any) => void) {
         // Create the request
         console.log("step 1");
-        control.simmessages.send(CHANNEL, control.createBufferFromUTF8('GET ${url}'));
+        sendJSON({ action: "open", url: url });
+        //control.simmessages.send(CHANNEL, control.createBufferFromUTF8('GET ${url}'));
         console.log("step 2");
         // Register an event listener to handle the response.
         control.simmessages.onReceived(CHANNEL, (responseBuf) => {
